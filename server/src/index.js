@@ -1,19 +1,17 @@
-import express from "express";
 import dotenv from "dotenv";
-import cors from "cors";
+import { app } from "./app.js";
+import connectDb from "./db/index.db.js";
 
 dotenv.config();
 
-const app = express();
+const port = process.env.PORT || 8000;
 
-app.use(cors());
-app.use(express.json());
-
-app.get("/", (req, res) => {
-    res.send("Backend running");
-});
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-});
+connectDb()
+	.then(() => {
+		app.listen(port, () => {
+			console.log(`app is running at port : http://localhost:${port}`);
+		});
+	})
+	.catch((error) => {
+		console.log("db connection got failed {inde.js} error :", error);
+	});
