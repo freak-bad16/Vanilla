@@ -1,0 +1,5 @@
+import PhoneScreen from "../../src/screens/auth/PhoneScreen";
+
+export default function PhoneRoute() {
+  return <PhoneScreen />;
+}
