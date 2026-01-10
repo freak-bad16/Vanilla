@@ -6,12 +6,13 @@ dotenv.config();
 
 const port = process.env.PORT || 8000;
 
-connectDb()
-	.then(() => {
-		app.listen(port, () => {
-			console.log(`app is running at port : http://localhost:${port}`);
-		});
-	})
+	connectDb()
+		.then(() => {
+			// bind to 0.0.0.0 so the server is reachable from other devices on the LAN
+			app.listen(port, "0.0.0.0", () => {
+				console.log(`app is running and listening on port ${port}`);
+			});
+		})
 	.catch((error) => {
 		console.log("db connection got failed {inde.js} error :", error);
 	});

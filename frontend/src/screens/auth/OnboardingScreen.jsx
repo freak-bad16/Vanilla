@@ -33,7 +33,7 @@ export default function OnboardingScreen() {
 
     console.log({ username, avatar, mood });
     // navigate to next screen or save onboarding data
-    router.push("/home/Profile");
+    router.push("/home");
   }
 
   return (

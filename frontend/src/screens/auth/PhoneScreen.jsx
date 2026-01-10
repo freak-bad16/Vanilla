@@ -15,12 +15,21 @@ import PrimaryButton from "../../components/auth/PrimaryButton";
 export default function PhoneScreen() {
     const router = useRouter();
     const [phNumber, setPhNumber] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     function handleOtp() {
         if (phNumber.length !== 10) return;
-        // API CALL HERE
-        console.log("Send OTP to:", phNumber);
-        router.push("/auth/otp");
+        setError(null);
+        setLoading(true);
+
+        // API call will be made here
+        // sendOtp(phNumber) ...
+
+        setTimeout(() => {
+            setLoading(false);
+            router.push(`/auth/otp?phone=${phNumber}`);
+        }, 1000);
     }
 
     return (
@@ -45,8 +54,11 @@ export default function PhoneScreen() {
                     <PrimaryButton
                         title="Send OTP"
                         onPress={handleOtp}
-                        disabled={phNumber.length !== 10}
+                        disabled={phNumber.length !== 10 || loading}
                     />
+
+                    {error ? <Text style={{ color: "#ff6666", marginTop: 12 }}>{error}</Text> : null}
+                    {loading ? <Text style={{ color: "#9ca3af", marginTop: 8 }}>Sending...</Text> : null}
                 </View>
             </KeyboardAvoidingView>
         </SafeAreaView>

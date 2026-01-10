@@ -1,5 +1,5 @@
 import ProfileScreen from "../../src/screens/ProfileScreen";
 
-export default function Onboarding() {
+export default function ProfileRoute() {
     return <ProfileScreen />;
 }
